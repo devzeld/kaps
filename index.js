@@ -23,12 +23,12 @@ for (const folder in commandFolders) {
         if ('data' in command && 'execute' in command) {
             client.commands.set(command.data.name, command);
         } else {
-            console.log('[WARNING] The command ${filepath} is missing a required "data" or "execute" property.');
+            console.log(`[WARNING] The command ${filePath} is missing a required "data" or "execute" property.`);
         }
     }
 }
 
 
 client.login(token).then(() => {
-    console.log(`Token: ${token}`);
+    console.log(`token: ${token}`);
 });
