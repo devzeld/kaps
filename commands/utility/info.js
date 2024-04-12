@@ -1,12 +1,39 @@
-const { SlashCommandBuilder } = require('discord.js');
+const {SlashCommandBuilder} = require('discord.js');
 
 module.exports = {
-    data: new SlashCommandBuilder()
+    data : new SlashCommandBuilder()
         .setName('info')
         .setDescription('Replies with infos of the user')
-        .addSubcommand()
-        ,
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('user')
+                .setDescription('user info')
+                .addUserOption(option =>
+                    option.setName('target').setDescription('member')
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('server')
+                .setDescription('server infos')
+                .addBooleanOption(option => option.setName('embed').setDescription('build embed'))
+        ),
     async execute(interaction) {
-        await interaction.reply(`Username: ${interaction.user.username}\nJoined: ${interaction.member.joinedAt}`);
-    },
-};
+        if (interaction.options.getSubcommand() === 'user') {
+            const user = interaction.options.getUser('target');
+
+            if (user) {
+                await interaction.reply(`Username: ${user.username}\nID: ${user.id}`);
+            } else {
+                await interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
+            }
+
+        } else if (interaction.options.getSubcommand() === 'server') {
+            if (interaction.options.getBoolean('embed') === true) {
+
+            } else if (interaction.options.getBoolean('embed') === false) {
+                await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
+            }
+        }
+    }
+}
