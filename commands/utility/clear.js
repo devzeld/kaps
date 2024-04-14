@@ -7,6 +7,7 @@ module.exports = {
         .addIntegerOption(option => option.setName('number').setDescription('Number of messages to delete'))
     ,
     async execute(interaction) {
+        interaction.channel.messages.message.delete();
         await interaction.reply(`Chat cleared successfully`);
     }
 }
