@@ -1,3 +1,5 @@
+# For IntelliJ IDEA
 .idea/
 
+# For the token
 config.json

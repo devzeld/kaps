@@ -63,10 +63,6 @@ for (const file of eventFiles) {
     }
 }
 
-
-
-
-
 // Discord Login
 client.login(token).then(() =>
     console.log(`token: ${token}`)
