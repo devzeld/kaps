@@ -5,7 +5,7 @@ const { token } = require('./config.json');
 
 // Intents
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds]
+    intents: [GatewayIntentBits.Guilds],
 });
 
 // Command Collection

@@ -31,11 +31,24 @@ module.exports = {
 
         } else if (interaction.options.getSubcommand() === 'server') {
             if (interaction.options.getBoolean('embed') === true) {
-                await interaction.channel.send({
+                await interaction.reply({
                     embeds: [new EmbedBuilder()
                         .setTitle(`${interaction.guild.name}`)
-                        .setDescription('cool server')
                         .setColor(interaction.member.displayHexColor)
+                        .setFields(
+                            {name: "Total members:", value: `${interaction.guild.members.size} Members`},
+
+                            {name: "Online members:", value: `Members`, inline: true},
+                            {name: "DND members:", value: `Members`, inline: true},
+                            {name: "Inactive members:", value: `Members`, inline: true},
+
+                            {name: "\u200B", value: "\u200B"},
+
+                            {name: "Total members:", value: `${interaction.guild.members.size} Members`, inline: true},
+                            {name: "Online members:", value: `Members`, inline: true},
+                            {name: "Online members:", value: `Members`, inline: true}
+                            )
+                        .setFooter({text: `Requested by: ${interaction.user.username}`, iconURL: interaction.user.avatarURL()})
                         ]
                     });
             } else if (interaction.options.getBoolean('embed') === false) {
